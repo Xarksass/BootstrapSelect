@@ -85,6 +85,7 @@ You can add a clear button to allow the user to clear his selection
 ### Live Filtering
 Need more html to be used but with this you can provide a live search inside your select, really useful into a select with a lot of options
 
+```html
 <div id="name-to-send" class="selectpicker" data-live="true">
     <button data-id="prov" type="button" class="btn btn-lg btn-block btn-default dropdown-toggle">
         <span class="placeholder">Choose an option</span>
@@ -116,3 +117,4 @@ Need more html to be used but with this you can provide a live search inside you
     </div>
     <input type="hidden" name="name-to-send" value="">
 </div>
+```
