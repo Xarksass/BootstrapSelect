@@ -24,6 +24,7 @@
         cancelbtn   : false,
         clearbtn    : false,
         livefilter  : false,
+        filter      : null,
         open        : 'open',
         filled      : 'filled',
         display     : '.dropdown-toggle',
@@ -57,6 +58,7 @@
             cancelbtn   : this.$element.attr('data-cancel') || DropdownSelect.DEFAULTS.cancelbtn,
             clearbtn    : this.$element.attr('data-clear') || DropdownSelect.DEFAULTS.clearbtn,
             livefilter  : this.$element.attr('data-live') || DropdownSelect.DEFAULTS.livefilter,
+            filter      : this.$element.attr('data-filter') || DropdownSelect.DEFAULTS.filter,
             open        : this.$element.attr('data-open') || DropdownSelect.DEFAULTS.open,
             filled      : this.$element.attr('data-filled') || DropdownSelect.DEFAULTS.filled,
             display     : DropdownSelect.DEFAULTS.display,
@@ -128,6 +130,7 @@
     }
 
     DropdownSelect.prototype.select = function( item ) {
+        var $select = this;
         if(this.structure.$current.length == 1)
             this.structure.$current.toggleClass('active');
 
@@ -136,7 +139,17 @@
         item.addClass('selected');
 
         this.updateDisplay('select',item);
-        this.toggle('close');
+        //this.toggle('close');
+
+        if ( this.options.filter != null) {
+            var $toFilter = this.options.filter.split(' ');
+
+            if ($.isArray($toFilter) && $toFilter.length > 0 ) {
+                for(var i=0;i < $toFilter.length;i++) {
+                    this.filter($toFilter[i],item.data('value'));
+                }
+            }
+        }
     }
 
     DropdownSelect.prototype.clear = function(e) {
@@ -146,7 +159,17 @@
         this.structure.$selected.removeClass('selected');
 
         this.updateDisplay('clear');
-        this.toggle('close');
+
+        if ( this.options.filter != null) {
+            var $toFilter = this.options.filter.split(' ');
+
+            if ($.isArray($toFilter) && $toFilter.length > 0 ) {
+                for(var i=0;i < $toFilter.length;i++) {
+                    this.filter($toFilter[i]);
+                }
+            }
+        }
+        //this.toggle('close');
     }
 
     DropdownSelect.prototype.refresh = function() {
@@ -167,6 +190,22 @@
             $('input[name="' + this.structure.$section + '"]').val('');
             this.structure.$display.html('<span class="placeholder">' + this.structure.$placeholder.html() + '</span><span class="caret"></span>').removeClass(this.options.filled);
         }
+    }
+
+    DropdownSelect.prototype.filter = function( select, val ) {
+        if( val ) {
+            $('#'+select+' .items').each(function(){
+                if($(this).data(select) != val){
+                    $(this).hide().addClass('disabled');
+                } else {
+                    $(this).show().removeClass('disabled');
+                }
+            });
+        } else {
+            $('#'+select+' .items').show().removeClass('disabled');
+        }
+
+        $('#'+select+' .live-filtering').liveFilter('initAC');
     }
 
 
