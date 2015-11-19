@@ -10,6 +10,8 @@ Need [livefilter](https://github.com/Xarksass/livefilter) and [tabcomplete](http
 ## Basic usage
 This is the basic html structure needed to use this plugin
 
+You can call the plugin by using `$('your-element').bootstrapSelect();` or simply by using the `.selectpicker` class
+
 ```html
 <div id="name-to-send" class="selectpicker">
     <button data-id="prov" type="button" class="btn btn-lg btn-block btn-default dropdown-toggle">

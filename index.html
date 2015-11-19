@@ -116,14 +116,18 @@
                                         <span class="caret"></span>
                                     </button>
                                     <div class="dropdown-menu">
-                                        <div class="live-filtering">
+                                        <div class="live-filtering" data-clear="true" data-autocomplete="true" data-keys="true">
                                             <div class="filter-parent">
                                                 <label class="sr-only" for="input-bts-ex-4">Search in the list</label>
                                                 <div class="search-box">
-                                                    <input type="text" class="form-control hint" tabindex="-1" />
-                                                    <input type="text" placeholder="Search in the list" id="input-bts-ex-4" class="form-control live-search" tabindex="1" />
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon" id="search-icon3">
+                                                            <span class="fa fa-search"></span>
+                                                            <a href="#" class="fa fa-times hide filter-clear"><span class="sr-only">Clear filter</span></a>
+                                                        </span>
+                                                        <input type="text" placeholder="Search in the list" id="input-bts-ex-4" class="form-control live-search" aria-describedby="search-icon3" tabindex="1" />
+                                                    </div>
                                                 </div>
-                                                <a href="#" class="fa fa-times hide filter-clear"><span class="sr-only">Clear filter</span></a>
                                                 <div class="list-to-filter">
                                                     <ul class="list-unstyled">
                                                         <li class="filter-item items" data-filter="item 1" data-value="1">item 1</li>
@@ -156,14 +160,18 @@
                                         <span class="caret"></span>
                                     </button>
                                     <div class="dropdown-menu">
-                                        <div class="live-filtering">
+                                        <div class="live-filtering" data-clear="true" data-autocomplete="true" data-keys="true">
                                             <div class="filter-parent">
                                                 <label class="sr-only" for="input-bts-ex-5">Search in the list</label>
                                                 <div class="search-box">
-                                                    <input type="text" class="form-control hint" tabindex="-1" />
-                                                    <input type="text" placeholder="Rechercher dans la liste" id="input-bts-ex-5" class="form-control live-search" tabindex="1" />
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon" id="search-icon5">
+                                                            <span class="fa fa-search"></span>
+                                                            <a href="#" class="fa fa-times hide filter-clear"><span class="sr-only">Clear filter</span></a>
+                                                        </span>
+                                                        <input type="text" placeholder="Search in the list" id="input-bts-ex-5" class="form-control live-search" aria-describedby="search-icon5" tabindex="1" />
+                                                    </div>
                                                 </div>
-                                                <a href="#" class="fa fa-times hide filter-clear"><span class="sr-only">Clear filter</span></a>
                                                 <div class="list-to-filter">
                                                     <ul class="list-unstyled">
                                                         <li class="optgroup">
@@ -198,7 +206,7 @@
         <script src="js/vendor/jquery-2.1.4.min.js"></script>
         <script src="js/vendor/bootstrap.min.js"></script>
         <script src="js/vendor/tabcomplete.min.js"></script>
-        <script src="js/vendor/src/livefilter.js"></script>
+        <script src="js/vendor/livefilter.min.js"></script>
         <script src="js/vendor/src/bootstrap-select.js"></script>
         <script src="js/plugins.js"></script>
 

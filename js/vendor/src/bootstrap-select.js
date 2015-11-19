@@ -1,7 +1,7 @@
 /*! ========================================================================
  * Bootstrap Select: bootstrap-select.js v2.0.0
  * ========================================================================
- * Copyright 2015, Salvatore Di Salvo (disalvo-infographiste[dot].be)
+ * Copyright 2015, Salvatore Di Salvo (disalvo-infographiste[dot]be)
  * ======================================================================== */
 
 +function ($) {
