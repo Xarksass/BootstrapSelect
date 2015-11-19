@@ -98,7 +98,7 @@
         }
 
         if ( this.options.livefilter ) {
-            $('.live-filtering').liveFilter();
+            $('.live-filtering', this.structure.$select).liveFilter();
         }
 
         $(document).mouseup(function(e) {
@@ -113,15 +113,26 @@
         if (mode) {
             if (mode == 'open')
                 this.$element.addClass(this.options.open);
-            else if (mode == 'close')
+            else if (mode == 'close') {
                 this.$element.removeClass(this.options.open);
+
+                if ( this.options.livefilter ) {
+                    $('.live-filtering', this.structure.$select).liveFilter('clear');
+                }
+            }
         }
         else
         {
             if(!this.$element.hasClass(this.options.open))
                 this.$element.addClass(this.options.open);
-            else
+            else {
                 this.$element.removeClass(this.options.open);
+
+                if ( this.options.livefilter ) {
+                    $('.live-filtering', this.structure.$select).liveFilter('clear');
+                }
+            }
+
         }
     }
 
