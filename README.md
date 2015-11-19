@@ -5,7 +5,7 @@ It's a jQuery plugin for Bootstrap to create dropdown select.
 ## Requirements
 Only need for basic features [Bootstrap 3.x](http://getbootstrap.com/)
 
-Need livefilter(link to the project will come soon) and [tabcomplete](https://github.com/erming/tabcomplete) for the usage of the live filtering feature
+Need [livefilter](https://github.com/Xarksass/livefilter) and [tabcomplete](https://github.com/erming/tabcomplete) for the usage of the live filtering feature
 
 ## Basic usage
 This is the basic html structure needed to use this plugin

@@ -1,3 +1,5 @@
 .idea
 /img/*
+/js/vendor/tabcomplete.min.js
+/js/vendor/livefilter.min.js
 /css/bootstrap/less/plugins/bootstrap-center-columns/bootstrap-center-columns_bak.less
