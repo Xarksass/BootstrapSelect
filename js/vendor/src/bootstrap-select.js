@@ -130,7 +130,6 @@
     }
 
     DropdownSelect.prototype.select = function( item ) {
-        var $select = this;
         if(this.structure.$current.length == 1)
             this.structure.$current.toggleClass('active');
 
@@ -146,7 +145,7 @@
 
             if ($.isArray($toFilter) && $toFilter.length > 0 ) {
                 for(var i=0;i < $toFilter.length;i++) {
-                    this.filter($toFilter[i],item.data('value'));
+                    this.filter(this.structure.$section,$toFilter[i],item.data('value'));
                 }
             }
         }
@@ -165,7 +164,7 @@
 
             if ($.isArray($toFilter) && $toFilter.length > 0 ) {
                 for(var i=0;i < $toFilter.length;i++) {
-                    this.filter($toFilter[i]);
+                    this.filter(this.structure.$section,$toFilter[i]);
                 }
             }
         }
@@ -192,17 +191,25 @@
         }
     }
 
-    DropdownSelect.prototype.filter = function( select, val ) {
+    DropdownSelect.prototype.filter = function( section, select, val ) {
         if( val ) {
             $('#'+select+' .items').each(function(){
-                if($(this).data(select) != val){
-                    $(this).hide().addClass('disabled');
+                if($(this).data(section) != val){
+                    $(this).hide().addClass('disabled').data('ref',section);
                 } else {
+                    if( $(this).data('ref') == section )
+                        $(this).removeData('ref');
                     $(this).show().removeClass('disabled');
                 }
             });
         } else {
-            $('#'+select+' .items').show().removeClass('disabled');
+            $('#'+select+' .items').each(function(){
+                if( $(this).data('ref') == section || $(this).data('ref') == undefined ) {
+                    if( $(this).data('ref') == section )
+                        $(this).removeData('ref');
+                    $(this).show().removeClass('disabled');
+                }
+            });
         }
 
         $('#'+select+' .live-filtering').liveFilter('initAC');
