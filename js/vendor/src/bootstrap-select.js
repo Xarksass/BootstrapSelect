@@ -163,7 +163,8 @@
     }
 
     DropdownSelect.prototype.clear = function(e) {
-        e.preventDefault();
+        if(e != undefined)
+            e.preventDefault();
 
         this.structure.$selected = this.get();
         this.structure.$selected.removeClass('selected');
@@ -204,6 +205,14 @@
 
     DropdownSelect.prototype.filter = function( section, select, val ) {
         if( val ) {
+            var $selected = $('#'+select+' .items.selected');
+
+            $selected.each(function(){
+                if( $(this).data(section) != val ) {
+                    $('#'+select).bootstrapSelect('clear');
+                }
+            });
+
             $('#'+select+' .items').each(function(){
                 if($(this).data(section) != val){
                     $(this).hide().addClass('disabled').data('ref',section);
