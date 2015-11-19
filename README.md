@@ -95,24 +95,22 @@ Need more html to be used but with this you can provide a live search inside you
     </button>
     <div class="dropdown-menu">
         <div class="live-filtering">
-            <div class="filter-parent">
-                <label class="sr-only" for="input-bts-ex-4">Search in the list</label>
-                <div class="search-box">
-                    <input type="text" class="form-control hint" tabindex="-1" />
-                    <input type="text" placeholder="Search in the list" id="input-bts-ex-4" class="form-control live-search" tabindex="1" />
-                </div>
-                <a href="#" class="fa fa-times hide filter-clear"><span class="sr-only">Clear filter</span></a>
-                <div class="list-to-filter">
-                    <ul class="list-unstyled">
-                        <li class="filter-item items" data-filter="item 1" data-value="1">item 1</li>
-                        <li class="filter-item items" data-filter="item 2" data-value="2">item 2</li>
-                        <li class="filter-item items" data-filter="item 3" data-value="3">item 3</li>
-                        <li class="filter-item items" data-filter="item 4" data-value="4">item 4</li>
-                        <li class="filter-item items" data-filter="item 5" data-value="5">item 5</li>
-                    </ul>
-                    <div class="no-search-results">
-                        <div class="alert alert-warning" role="alert"><i class="fa fa-warning margin-right-sm"></i>No entry for <strong>'<span></span>'</strong> was found.</div>
-                    </div>
+            <label class="sr-only" for="input-bts-ex-4">Search in the list</label>
+            <div class="search-box">
+                <input type="text" class="form-control hint" tabindex="-1" />
+                <input type="text" placeholder="Search in the list" id="input-bts-ex-4" class="form-control live-search" tabindex="1" />
+            </div>
+            <a href="#" class="fa fa-times hide filter-clear"><span class="sr-only">Clear filter</span></a>
+            <div class="list-to-filter">
+                <ul class="list-unstyled">
+                    <li class="filter-item items" data-filter="item 1" data-value="1">item 1</li>
+                    <li class="filter-item items" data-filter="item 2" data-value="2">item 2</li>
+                    <li class="filter-item items" data-filter="item 3" data-value="3">item 3</li>
+                    <li class="filter-item items" data-filter="item 4" data-value="4">item 4</li>
+                    <li class="filter-item items" data-filter="item 5" data-value="5">item 5</li>
+                </ul>
+                <div class="no-search-results">
+                    <div class="alert alert-warning" role="alert"><i class="fa fa-warning margin-right-sm"></i>No entry for <strong>'<span></span>'</strong> was found.</div>
                 </div>
             </div>
         </div>
