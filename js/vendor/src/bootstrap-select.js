@@ -17,14 +17,16 @@
         this.init()
     }
 
-    DropdownSelect.VERSION  = '2.0.0'
+    DropdownSelect.VERSION  = '2.4.0'
 
     DropdownSelect.DEFAULTS = {
         select      : this,
+        autoclose   : true,
         cancelbtn   : false,
         clearbtn    : false,
         livefilter  : false,
         filter      : null,
+        fmethod     : 'recursive',
         open        : 'open',
         filled      : 'filled',
         display     : '.dropdown-toggle',
@@ -55,10 +57,12 @@
     DropdownSelect.prototype.defaults = function() {
         return {
             select      : DropdownSelect.DEFAULTS.select,
+            autoclose   : this.$element.attr('data-autoclose') || DropdownSelect.DEFAULTS.autoclose,
             cancelbtn   : this.$element.attr('data-cancel') || DropdownSelect.DEFAULTS.cancelbtn,
             clearbtn    : this.$element.attr('data-clear') || DropdownSelect.DEFAULTS.clearbtn,
             livefilter  : this.$element.attr('data-live') || DropdownSelect.DEFAULTS.livefilter,
             filter      : this.$element.attr('data-filter') || DropdownSelect.DEFAULTS.filter,
+            fmethod     : this.$element.attr('data-fmethod') || DropdownSelect.DEFAULTS.fmethod,
             open        : this.$element.attr('data-open') || DropdownSelect.DEFAULTS.open,
             filled      : this.$element.attr('data-filled') || DropdownSelect.DEFAULTS.filled,
             display     : DropdownSelect.DEFAULTS.display,
@@ -149,16 +153,22 @@
         item.addClass('selected');
 
         this.updateDisplay('select',item);
-        //this.toggle('close');
 
         if ( this.options.filter != null) {
             var $toFilter = this.options.filter.split(' ');
 
             if ($.isArray($toFilter) && $toFilter.length > 0 ) {
                 for(var i=0;i < $toFilter.length;i++) {
-                    this.filter(this.structure.$section,$toFilter[i],item.data('value'));
+                    var $this = $('#'+$toFilter[i]);
+                    $this.selectFilter({ method: this.options.fmethod });
+                    $this.selectFilter('filter',this.structure.$section,$toFilter[i],item.data('value'));
+                    //this.filter(this.structure.$section,$toFilter[i],item.data('value'));
                 }
             }
+        }
+
+        if (this.options.autoclose === true) {
+            this.toggle('close');
         }
     }
 
@@ -176,11 +186,17 @@
 
             if ($.isArray($toFilter) && $toFilter.length > 0 ) {
                 for(var i=0;i < $toFilter.length;i++) {
-                    this.filter(this.structure.$section,$toFilter[i]);
+                    var $this = document.getElementById($toFilter[i]);
+                    $this.selectFilter({ method: this.options.fmethod });
+                    $this.selectFilter('filter',this.structure.$section,$toFilter[i]);
+                    //this.filter(this.structure.$section,$toFilter[i]);
                 }
             }
         }
-        //this.toggle('close');
+
+        if (this.options.autoclose === true) {
+            this.toggle('close');
+        }
     }
 
     DropdownSelect.prototype.refresh = function() {
@@ -203,37 +219,79 @@
         }
     }
 
-    DropdownSelect.prototype.filter = function( section, select, val ) {
+    /*DropdownSelect.prototype.filter = function( section, select, val ) {
         if( val ) {
             var $selected = $('#'+select+' .items.selected');
 
-            $selected.each(function(){
-                if( $(this).data(section) != val ) {
-                    $('#'+select).bootstrapSelect('clear');
-                }
-            });
+            if($selected.length) {
+                $selected.each(function(){
+                    if( $(this).data(section) != val ) {
+                        $('#'+select).bootstrapSelect('clear');
+                    }
+                });
+            }
 
-            $('#'+select+' .items').each(function(){
-                if($(this).data(section) != val){
-                    $(this).hide().addClass('disabled').data('ref',section);
-                } else {
-                    if( $(this).data('ref') == section )
-                        $(this).removeData('ref');
-                    $(this).show().removeClass('disabled');
-                }
-            });
-        } else {
-            $('#'+select+' .items').each(function(){
-                if( $(this).data('ref') == section || $(this).data('ref') == undefined ) {
-                    if( $(this).data('ref') == section )
-                        $(this).removeData('ref');
-                    $(this).show().removeClass('disabled');
-                }
-            });
+            this.filterItem( section, select, val, this.options.fmethod );
+        }
+        else
+        {
+            this.filterItem( section, select, null, this.options.fmethod );
         }
 
         $('#'+select+' .live-filtering').liveFilter('initAC');
     }
+
+    DropdownSelect.prototype.filterItem = function( section, select, val, method ) {
+        $('#'+select+' .items').each(function(){
+            var ref = $(this).data('ref'),
+                valid = $(this).data('valid');
+
+            if( ref != undefined && valid != undefined ) {
+                ref = ref.split(',');
+                valid = valid.split(',');
+
+                if ( ref.length == valid.length ) {
+                    if (val != null) {
+                        if (ref.indexOf(section) > -1) {
+                            valid[ref.indexOf(section)] = val;
+                        }else {
+                            ref = ref.concat([section]);
+                            valid = valid.concat([val]);
+                        }
+                    } else {
+                        ref.splice(ref.indexOf(section),1);
+                        valid.splice(ref.indexOf(section),1);
+                    }
+                }
+            } else if (val != null) {
+                ref = [section];
+                valid = [val];
+            }
+
+            if( method == 'recursive' ) {
+                var skip = true;
+                for( var c = 0; c < ref.length; c++ ) {
+                    if ( valid[c] != $(this).data(ref[c])) {
+                        skip = false;
+                    }
+                }
+            } else if ( method == 'additionnal' ) {
+                var skip = false;
+                for( var c = 0; c < ref.length; c++ ) {
+                    if ( valid[c] == $(this).data(ref[c])) {
+                        skip = true;
+                    }
+                }
+            }
+
+            $(this).data('ref',ref.toString()).data('valid',valid.toString());
+            if ( !skip ) {
+                $(this).addClass('disabled').hide();
+            } else {
+                $(this).removeClass('disabled').show();
+            }
+        });
+    }*/
 
 
     // DROPDOWN SELECT PLUGIN DEFINITION
@@ -255,6 +313,7 @@
     $.fn.bootstrapSelect             = Plugin
     $.fn.bootstrapSelect.Constructor = DropdownSelect
 
+
     // DROPDOWN SELECT NO CONFLICT
     // ========================
 
@@ -262,6 +321,7 @@
         $.fn.bootstrapSelect = old
         return this
     }
+
 
     // DROPDOWN SELECT DATA-API
     // =====================

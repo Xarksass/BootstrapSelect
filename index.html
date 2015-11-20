@@ -201,7 +201,7 @@
 
                         <div class="row">
                             <div class="col-sm-4">
-                                <div id="select1" class="selectpicker" data-clear="true" data-live="true" data-filter="select2">
+                                <div id="select1" class="selectpicker" data-clear="true" data-autoclose="false" data-live="true" data-filter="select2 select3" data-fmethod="recursive">
                                     <a href="#" class="clear"><span class="fa fa-times"></span><span class="sr-only">Cancel the selection</span></a>
                                     <button data-id="prov" type="button" class="btn btn-lg btn-block btn-default dropdown-toggle">
                                         <span class="placeholder">Choose an option</span>
@@ -228,7 +228,6 @@
                                                             <li class="filter-item items" data-filter="item 2" data-value="2">item 2</li>
                                                             <li class="filter-item items" data-filter="item 3" data-value="3">item 3</li>
                                                             <li class="filter-item items" data-filter="item 4" data-value="4">item 4</li>
-                                                            <li class="filter-item items" data-filter="item 5" data-value="5">item 5</li>
                                                         </ul>
                                                     </li>
                                                 </ul>
@@ -243,7 +242,7 @@
                             </div>
 
                             <div class="col-sm-4">
-                                <div id="select2" class="selectpicker" data-clear="true" data-live="true">
+                                <div id="select2" class="selectpicker" data-clear="true" data-autoclose="false" data-live="true" data-filter="select3" data-fmethod="recursive">
                                     <a href="#" class="clear"><span class="fa fa-times"></span><span class="sr-only">Cancel the selection</span></a>
                                     <button data-id="prov" type="button" class="btn btn-lg btn-block btn-default dropdown-toggle">
                                         <span class="placeholder">Choose an option</span>
@@ -267,10 +266,66 @@
                                                         <span class="optgroup-header">List Group <span class="subtext"></span></span>
                                                         <ul class="list-unstyled">
                                                             <li class="filter-item items" data-filter="item 1" data-select1="1" data-value="1">item 1</li>
-                                                            <li class="filter-item items" data-filter="item 2" data-select1="1" data-value="2">item 2</li>
+                                                            <li class="filter-item items" data-filter="item 2" data-select1="2" data-value="2">item 2</li>
                                                             <li class="filter-item items" data-filter="item 3" data-select1="1" data-value="3">item 3</li>
-                                                            <li class="filter-item items" data-filter="item 4" data-select1="4" data-value="4">item 4</li>
-                                                            <li class="filter-item items" data-filter="item 5" data-select1="5" data-value="5">item 5</li>
+                                                            <li class="filter-item items" data-filter="item 4" data-select1="2" data-value="4">item 4</li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                                <div class="no-search-results">
+                                                    <div class="alert alert-warning" role="alert"><i class="fa fa-warning margin-right-sm"></i>No entry for <strong>'<span></span>'</strong> was found.</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="bts-ex-5" value="">
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <div id="select3" class="selectpicker" data-clear="true" data-autoclose="false" data-live="true">
+                                    <a href="#" class="clear"><span class="fa fa-times"></span><span class="sr-only">Cancel the selection</span></a>
+                                    <button data-id="prov" type="button" class="btn btn-lg btn-block btn-default dropdown-toggle">
+                                        <span class="placeholder">Choose an option</span>
+                                        <span class="caret"></span>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <div class="live-filtering" data-clear="true" data-autocomplete="true" data-keys="true">
+                                            <label class="sr-only" for="input-bts-ex-5">Search in the list</label>
+                                            <div class="search-box">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon" id="search-icon8">
+                                                        <span class="fa fa-search"></span>
+                                                        <a href="#" class="fa fa-times hide filter-clear"><span class="sr-only">Clear filter</span></a>
+                                                    </span>
+                                                    <input type="text" placeholder="Search in the list" id="input-select3" class="form-control live-search" aria-describedby="search-icon8" tabindex="1" />
+                                                </div>
+                                            </div>
+                                            <div class="list-to-filter">
+                                                <ul class="list-unstyled">
+                                                    <li class="optgroup">
+                                                        <span class="optgroup-header">List Group <span class="subtext"></span></span>
+                                                        <ul class="list-unstyled">
+                                                            <li class="filter-item items" data-filter="item 1"
+                                                                data-select1="1" data-select2="1" data-value="1">Item 1-1</li>
+                                                            <li class="filter-item items" data-filter="item 2"
+                                                                data-select1="2" data-select2="2" data-value="2">Item 2-2</li>
+                                                            <li class="filter-item items" data-filter="item 3"
+                                                                data-select1="1" data-select2="2" data-value="3">Item 1-2</li>
+                                                            <li class="filter-item items" data-filter="item 4"
+                                                                data-select1="1" data-select2="3" data-value="4">Item 1-3</li>
+                                                            <li class="filter-item items" data-filter="item 5"
+                                                                data-select1="2" data-select2="3" data-value="5">Item 2-3</li>
+                                                            <li class="filter-item items" data-filter="item 6"
+                                                                data-select1="3" data-select2="3" data-value="6">Item 3-3</li>
+                                                            <li class="filter-item items" data-filter="item 7"
+                                                                data-select1="1" data-select2="4" data-value="7">Item 1-4</li>
+                                                            <li class="filter-item items" data-filter="item 8"
+                                                                data-select1="2" data-select2="4" data-value="8">Item 2-4</li>
+                                                            <li class="filter-item items" data-filter="item 9"
+                                                                data-select1="3" data-select2="4" data-value="9">Item 3-4</li>
+                                                            <li class="filter-item items" data-filter="item 10"
+                                                                data-select1="4" data-select2="4" data-value="10">Item 4-4</li>
                                                         </ul>
                                                     </li>
                                                 </ul>
@@ -296,6 +351,7 @@
         <script src="js/vendor/tabcomplete.min.js"></script>
         <script src="js/vendor/livefilter.min.js"></script>
         <script src="js/vendor/src/bootstrap-select.js"></script>
+        <script src="js/vendor/src/filterlist.js"></script>
         <script src="js/plugins.js"></script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
