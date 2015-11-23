@@ -17,7 +17,7 @@
         this.init()
     }
 
-    DropdownSelect.VERSION  = '2.4.1' 
+    DropdownSelect.VERSION  = '2.4.1'
 
     DropdownSelect.DEFAULTS = {
         select      : this,
