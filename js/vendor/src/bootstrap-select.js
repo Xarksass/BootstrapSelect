@@ -17,7 +17,7 @@
         this.init()
     }
 
-    DropdownSelect.VERSION  = '2.4.2'
+    DropdownSelect.VERSION  = '2.4.4'
 
     DropdownSelect.DEFAULTS = {
         select      : this,
@@ -82,24 +82,24 @@
             $select.select($(this.structure.$selected));
         }
 
-        this.structure.$display.on('click', function(e) {
+        this.structure.$display.off().on('click', function(e) {
             e.preventDefault();
             $select.toggle();
         });
 
-        this.structure.$items.on('click', function(){
+        this.structure.$items.off().on('click', function(){
             $select.select($(this));
         });
 
         if ( this.options.cancelbtn ) {
-            this.structure.$cancel.on('click', function (e) {
+            this.structure.$cancel.off().on('click', function (e) {
                 e.preventDefault();
                 $select.toggle('close');
             });
         }
 
         if ( this.options.clearbtn ) {
-            this.structure.$clear.on('click', function (e) {
+            this.structure.$clear.off().on('click', function (e) {
                 $select.clear(e);
             });
         }
@@ -116,7 +116,7 @@
         }
 
         if ( this.options.livefilter ) {
-            $('.live-filtering', this.structure.$select).liveFilter();
+            $('.live-filtering').liveFilter();
         }
 
         $(document).mouseup(function(e) {
@@ -185,21 +185,24 @@
     }
 
     DropdownSelect.prototype.clear = function(e) {
-        if(e != undefined)
+        if ( e != undefined )
             e.preventDefault();
 
         this.structure.$selected = this.get();
-        this.structure.$selected.removeClass('selected');
 
-        this.updateDisplay('clear');
+        if ( this.structure.$selected.html() != undefined ) {
+            this.structure.$selected.removeClass('selected');
 
-        if ( this.options.filter != null) {
-            var $toFilter = this.options.filter.split(' ');
+            this.updateDisplay('clear');
 
-            if ($.isArray($toFilter) && $toFilter.length > 0 ) {
-                for(var i=0;i < $toFilter.length;i++) {
-                    var $this = $('#'+$toFilter[i]);
-                    $this.listFilter('filter',this.structure.$section);
+            if ( this.options.filter != null) {
+                var $toFilter = this.options.filter.split(' ');
+
+                if ($.isArray($toFilter) && $toFilter.length > 0 ) {
+                    for(var i=0;i < $toFilter.length;i++) {
+                        var $this = $('#'+$toFilter[i]);
+                        $this.listFilter('filter',this.structure.$section);
+                    }
                 }
             }
         }
@@ -215,23 +218,34 @@
         }
     }
 
+    DropdownSelect.prototype.reset = function() {
+        this.structure = $.extend({}, this.parts());
+        this.init();
+    }
+
     DropdownSelect.prototype.updateDisplay = function( mode, selected ) {
+        var e = $.Event('change.bs.dropdownselect');
+
         if( mode == 'select') {
             this.structure.$clear.show();
             $('input[name="' + this.structure.$section + '"]').val( selected.data('value') );
+            $('input[name="' + this.structure.$section + '_id"]').val( selected.data('id') );
             this.structure.$display.html('<span class="text">' + selected.html() + '</span><span class="caret"></span>').addClass(this.options.filled);
         }
 
         if( mode == 'clear') {
             this.structure.$clear.hide();
             $('input[name="' + this.structure.$section + '"]').val('');
+            $('input[name="' + this.structure.$section + '_id"]').val('');
             this.structure.$display.html('<span class="placeholder">' + this.structure.$placeholder.html() + '</span><span class="caret"></span>').removeClass(this.options.filled);
         }
+
+        $('input[name="' + this.structure.$section + '_id"]').trigger(e);
     }
 
 
     // DROPDOWN SELECT PLUGIN DEFINITION
-    // ==============================
+    // =================================
 
     function Plugin() {
         var arg = arguments;
@@ -252,15 +266,13 @@
                     $.error( 'Method ' +  method + ' does not exist on jQuery.DropdownSelect' );
                     return this;
                 }
-            }
-        })
+            } })
     }
 
     var old = $.fn.bootstrapSelect
 
     $.fn.bootstrapSelect             = Plugin
     $.fn.bootstrapSelect.Constructor = DropdownSelect
-
 
     // DROPDOWN SELECT NO CONFLICT
     // ========================
@@ -269,7 +281,6 @@
         $.fn.bootstrapSelect = old
         return this
     }
-
 
     // DROPDOWN SELECT DATA-API
     // =====================
