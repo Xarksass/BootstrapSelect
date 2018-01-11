@@ -1,5 +1,5 @@
 /*! ========================================================================
- * Bootstrap Select: bootstrap-select.js v2.0.0
+ * Bootstrap Select: bootstrap-select.js v2.4.5
  * ========================================================================
  * Copyright 2015, Salvatore Di Salvo (disalvo-infographiste[dot]be)
  * ======================================================================== */
@@ -17,7 +17,7 @@
         this.init()
     }
 
-    DropdownSelect.VERSION  = '2.4.4'
+    DropdownSelect.VERSION  = '2.4.5'
 
     DropdownSelect.DEFAULTS = {
         select      : this,
@@ -42,7 +42,7 @@
     DropdownSelect.prototype.parts = function() {
         return {
             $select         : this.$element,
-            $section        : this.$element.attr('id'),
+            $section        : this.$element.attr('data-section') ? this.$element.attr('data-section') : this.$element.attr('id'),
             $display        : $(this.options.display, this.$element),
             $list           : $(this.options.list, this.$element),
             $placeholder    : $(this.options.placeholder, this.$element),
@@ -223,20 +223,24 @@
         this.init();
     }
 
+    DropdownSelect.prototype.empty = function() {
+        this.structure.$items.first().parent().empty();
+    }
+
     DropdownSelect.prototype.updateDisplay = function( mode, selected ) {
         var e = $.Event('change.bs.dropdownselect');
 
         if( mode == 'select') {
             this.structure.$clear.show();
-            $('input[name="' + this.structure.$section + '"]').val( selected.data('value') );
-            $('input[name="' + this.structure.$section + '_id"]').val( selected.data('id') );
+            $('input[name="' + this.structure.$section + '"]').val( selected.data('value') ).trigger('change');
+            $('input[name="' + this.structure.$section + '_id"]').val( selected.data('id') ).trigger('change');
             this.structure.$display.html('<span class="text">' + selected.html() + '</span><span class="caret"></span>').addClass(this.options.filled);
         }
 
         if( mode == 'clear') {
             this.structure.$clear.hide();
-            $('input[name="' + this.structure.$section + '"]').val('');
-            $('input[name="' + this.structure.$section + '_id"]').val('');
+            $('input[name="' + this.structure.$section + '"]').val('').trigger('change');
+            $('input[name="' + this.structure.$section + '_id"]').val('').trigger('change');
             this.structure.$display.html('<span class="placeholder">' + this.structure.$placeholder.html() + '</span><span class="caret"></span>').removeClass(this.options.filled);
         }
 
