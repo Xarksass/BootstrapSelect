@@ -1,6 +1,5 @@
 .idea
 /img/*
 /js/vendor/tabcomplete.min.js
-/js/vendor/livefilter.min.js
-/js/vendor/filterlist.min.js
-js/vendor/filterlist.min.js
+/js/vendor/nativeLivefilter.min.js
+/js/vendor/nativeFilterlist.min.js

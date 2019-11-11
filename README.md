@@ -1,10 +1,8 @@
 # Bootstrap Select
 ## Description
-It's a jQuery plugin for Bootstrap to create dropdown select.
+It's a plain js script for Bootstrap to create dropdown select.
 
 ## Requirements
-Only need for basic features [Bootstrap 3.x](http://getbootstrap.com/) and jQuery.
-
 Need [livefilter](https://github.com/Xarksass/livefilter) and [tabcomplete](https://github.com/erming/tabcomplete) for the usage of the live filtering feature.
 
 Need [FilterList](https://github.com/Xarksass/FilterList) for the filter select feature.
